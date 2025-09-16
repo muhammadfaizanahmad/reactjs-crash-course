@@ -1,20 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useContext } from "react";
+import { CounterContext } from "@context/counter-context";
 
 export default function Counter() {
-  const [count, setCount] = useState<number>(0);
-  function handleClick() {
-    setCount(count + 1);
-  }
+  const { state, dispatch } = useContext(CounterContext);
   return (
-    <div className="bg-indigo-500 h-screen flex justify-center items-center">
-      <button
-        className="border border-white text-white rounded-md p-2"
-        onClick={handleClick}
-      >
-        Clicked {count} times
-      </button>
+    <div>
+      <h1>Count: {state.count}</h1>
+      <button onClick={() => dispatch({ type: "increment" })}>Increment</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>Decrement</button>
     </div>
   );
 }
